@@ -10,6 +10,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -122,27 +123,64 @@ fun CameraScreen() {
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                Text("Camera permission is required to use this feature.")
+                Text("Camera permission required")
             }
         }
 
-        Row(
+        FlowRow(
+            maxItemsInEachRow = 3,
+            horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(16.dp)
                 .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            val filters = listOf("Original", "Warm", "Cool", "Vintage", "Dark", "B&W")
-            filters.forEach { f ->
-                Button(
-                    onClick = { filter = f },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = if (filter == f) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
-                    )
-                ) {
-                    Text(f)
+            Button(
+                onClick = {
+                    filter = "Original"
                 }
+            ) {
+                Text("Original")
+            }
+
+            Button(
+                onClick = {
+                    filter = "Warm"
+                }
+            ) {
+                Text("Warm")
+            }
+
+            Button(
+                onClick = {
+                    filter = "B&W"
+                }
+            ) {
+                Text("B&W")
+            }
+
+            Button(
+                onClick = {
+                    filter = "Cool"
+                }
+            ) {
+                Text("Cool")
+            }
+
+            Button(
+                onClick = {
+                    filter = "Vintage"
+                }
+            ) {
+                Text("Vintage")
+            }
+
+            Button(
+                onClick = {
+                    filter = "Dark"
+                }
+            ) {
+                Text("Dark")
             }
         }
     }

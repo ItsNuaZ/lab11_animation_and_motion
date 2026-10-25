@@ -143,32 +143,34 @@ fun HomeScreen(
 
             Spacer(Modifier.height(24.dp))
 
-            Button(
-                onClick = onCameraClick,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("📷 Camera Filter")
+            Row {
+                Button(
+                    onClick = onCameraClick
+                ) {
+                    Text("📷 Camera Filter")
+                }
+                Spacer(Modifier.width(8.dp))
+                Button(
+                    onClick = onMusicClick
+                ) {
+                    Text("🎵 Music Player")
+                }
             }
+
             Spacer(Modifier.height(8.dp))
-            Button(
-                onClick = onMusicClick,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("🎵 Music Player")
-            }
-            Spacer(Modifier.height(8.dp))
-            Button(
-                onClick = onVideoClick,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("🎬 Video Player")
-            }
-            Spacer(Modifier.height(8.dp))
-            Button(
-                onClick = onSensorClick,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("👟 Step Counter")
+
+            Row {
+                Button(
+                    onClick = onVideoClick
+                ) {
+                    Text("🎬 Video Player")
+                }
+                Spacer(Modifier.width(8.dp))
+                Button(
+                    onClick = onSensorClick
+                ) {
+                    Text("👟 Step Counter")
+                }
             }
         }
     }
