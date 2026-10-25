@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -27,17 +29,26 @@ class MainActivity : ComponentActivity() {
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
-                        when (currentScreen) {
-                            "home" -> HomeScreen(
-                                onCameraClick = { currentScreen = "camera" },
-                                onMusicClick = { currentScreen = "music" },
-                                onVideoClick = { currentScreen = "video" },
-                                onSensorClick = { currentScreen = "sensor" }
-                            )
-                            "camera" -> CameraScreen()
-                            "music" -> MusicScreen()
-                            "video" -> VideoScreen()
-                            "sensor" -> StepCounterScreen()
+                        AnimatedContent(
+                            targetState = currentScreen,
+                            transitionSpec = {
+                                (fadeIn(animationSpec = tween(300)) + slideInHorizontally(animationSpec = tween(300)) { it / 2 })
+                                    .togetherWith(fadeOut(animationSpec = tween(300)) + slideOutHorizontally(animationSpec = tween(300)) { -it / 2 })
+                            },
+                            label = "screenTransition"
+                        ) { screen ->
+                            when (screen) {
+                                "home" -> HomeScreen(
+                                    onCameraClick = { currentScreen = "camera" },
+                                    onMusicClick = { currentScreen = "music" },
+                                    onVideoClick = { currentScreen = "video" },
+                                    onSensorClick = { currentScreen = "sensor" }
+                                )
+                                "camera" -> CameraScreen()
+                                "music" -> MusicScreen()
+                                "video" -> VideoScreen()
+                                "sensor" -> StepCounterScreen()
+                            }
                         }
                     }
                 }
